@@ -26,8 +26,8 @@ export const CommentListStable = () => {
   };
 
   const postComment = async (newComment: string) => {
+    setCreating(true);
     try {
-      setCreating(true);
       // 偽のデータが既に作成済か調べる
       const optimisticComment = findOptimisticComment(comments);
       // 偽のデータがない場合

@@ -68,39 +68,40 @@ export const CommentListUseOptimistic = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    startTransition(() => postComment(inputText));
+    postComment(inputText);
   };
 
   const handleRetry = (selectedComment: string) => {
-    startTransition(() => postComment(selectedComment));
+    postComment(selectedComment);
   };
 
   const postComment = async (newComment: string) => {
-    try {
-      setCreating(true);
-      // 偽のデータが既に作成済か調べる
-      const optimisticComment = findOptimisticComment(comments);
-      // 偽のデータがなければ、作成する
-      if (!optimisticComment) {
-        dispatchOptimisticComments({ type: "add", newComment });
-      } else {
-        // 偽のデータがあれば、それはエラーコメントと判定されている。
-        dispatchOptimisticComments({ type: "revert-error" });
+    setCreating(true);
+    startTransition(async () => {
+      try {
+        // 偽のデータが既に作成済か調べる
+        const optimisticComment = findOptimisticComment(comments);
+        // 偽のデータがなければ、作成する
+        if (!optimisticComment) {
+          dispatchOptimisticComments({ type: "add", newComment });
+        } else {
+          // 偽のデータがあれば、それはエラーコメントと判定されている。
+          dispatchOptimisticComments({ type: "revert-error" });
+        }
+
+        await commentApi.addComment(newComment);
+        await refresh();
+
+        setInputText("");
+      } catch (error) {
+        // 偽のデータをエラー判定にする
+        dispatchOptimisticComments({ type: "error" });
+        toast.error("投稿に失敗しました。");
+      } finally {
+        setCreating(false);
+        inputRef.current?.focus();
       }
-
-      await commentApi.addComment(newComment);
-      await refresh();
-
-      setInputText("");
-    } catch (error) {
-      // 偽のデータをエラー判定にする
-      dispatchOptimisticComments({ type: "error" });
-      toast.error("投稿に失敗しました。");
-    } finally {
-      setCreating(false);
-      inputRef.current?.focus();
-    }
+    });
   };
 
   return (
