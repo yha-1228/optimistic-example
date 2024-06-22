@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { commentApi } from "../api";
-import type { CommentResponse } from "../api";
+import { commentApi } from "@/backend/api-client";
+import type { CommentResponse } from "@/backend/api-client";
 
 export interface CommentState extends CommentResponse {
   isError?: boolean;

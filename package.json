@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mock": "node src/mock-server/server.js",
+    "mock": "node src/backend/server.js",
     "format": "npx prettier . --write"
   },
   "dependencies": {

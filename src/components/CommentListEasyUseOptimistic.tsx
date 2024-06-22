@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react";
 import { startTransition, useOptimistic, useRef, useState } from "react";
-import { commentApi } from "@/api";
+import { commentApi } from "@/backend/api-client";
 import { useComments } from "../hooks/useComments";
 import { isOptimisticComment } from "./logics/comment";
 

@@ -3,7 +3,7 @@
 import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { commentApi } from "@/api";
+import { commentApi } from "@/backend/api-client";
 import { useComments } from "../hooks/useComments";
 import { findOptimisticComment, isOptimisticComment } from "./logics/comment";
 import { CommentListView } from "./shared/CommentListView";

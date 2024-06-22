@@ -3,10 +3,11 @@
 import type { FormEvent } from "react";
 import { startTransition, useOptimistic, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { commentApi, type CommentResponse } from "@/api";
+import { commentApi } from "@/backend/api-client";
 import { useComments } from "@/hooks/useComments";
 import { findOptimisticComment, isOptimisticComment } from "./logics/comment";
 import { CommentListView } from "./shared/CommentListView";
+import type { CommentResponse } from "@/backend/api-client";
 
 type OptimisticCommentsAction =
   | { type: "add"; newComment: string }
