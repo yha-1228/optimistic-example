@@ -123,7 +123,6 @@ export const CommentListUseOptimistic = () => {
       <CommentListView
         loading={loading}
         comments={optimisticComments}
-        creating={creating}
         onRetry={handleRetry}
       />
     </div>

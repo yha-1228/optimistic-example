@@ -95,7 +95,6 @@ export const CommentListStable = () => {
       <CommentListView
         loading={loading}
         comments={comments}
-        creating={creating}
         onRetry={handleRetry}
       />
     </div>
