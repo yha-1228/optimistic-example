@@ -4,14 +4,12 @@ import type { UseCommentsReturn } from "../../hooks/useComments";
 
 export interface CommentListViewProps extends Partial<UseCommentsReturn> {
   onRetry?: (selectedComment: string) => void;
-  creating?: boolean;
 }
 
 export const CommentListView = ({
   loading,
   comments,
   onRetry,
-  creating,
 }: CommentListViewProps) => {
   if (!comments) {
     return null;
