@@ -5,7 +5,11 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
 import { useComments } from "../hooks/useComments";
-import { findOptimisticComment, isOptimisticComment } from "./logics/comment";
+import {
+  createOptimisticComment,
+  findOptimisticComment,
+  isOptimisticComment,
+} from "./logics/comment";
 import { CommentListView } from "./shared/CommentListView";
 
 export const CommentListStable = () => {
@@ -34,11 +38,7 @@ export const CommentListStable = () => {
       if (!optimisticComment) {
         setComments((state) => [
           ...(state || []),
-          {
-            id: "mock-id",
-            comment: newComment,
-            createdAt: "",
-          },
+          createOptimisticComment(inputText),
         ]);
       } else {
         // 偽のデータがあれば、それはエラーコメントと判定されている。

@@ -5,7 +5,11 @@ import { startTransition, useOptimistic, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
 import { useComments } from "@/hooks/useComments";
-import { findOptimisticComment, isOptimisticComment } from "./logics/comment";
+import {
+  createOptimisticComment,
+  findOptimisticComment,
+  isOptimisticComment,
+} from "./logics/comment";
 import { CommentListView } from "./shared/CommentListView";
 import type { CommentResponse } from "@/backend/api-client";
 
@@ -21,14 +25,7 @@ const optimisticCommentsReducer = (
   switch (action.type) {
     case "add": {
       // 偽のデータを作成する
-      return [
-        ...(state || []),
-        {
-          id: "mock-id",
-          comment: action.newComment,
-          createdAt: "",
-        },
-      ];
+      return [...(state || []), createOptimisticComment(action.newComment)];
     }
     case "error": {
       // 偽のデータをエラー判定にする

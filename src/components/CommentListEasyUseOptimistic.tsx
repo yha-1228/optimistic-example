@@ -4,7 +4,7 @@ import type { FormEvent } from "react";
 import { startTransition, useOptimistic, useRef, useState } from "react";
 import { commentApi } from "@/backend/api-client";
 import { useComments } from "../hooks/useComments";
-import { isOptimisticComment } from "./logics/comment";
+import { createOptimisticComment, isOptimisticComment } from "./logics/comment";
 
 export const CommentListEasyUseOptimistic = () => {
   const { comments, refresh } = useComments();
@@ -12,7 +12,7 @@ export const CommentListEasyUseOptimistic = () => {
     comments,
     (state, newComment: string) => [
       ...(state || []),
-      { id: "mock-id", comment: newComment, createdAt: "" },
+      createOptimisticComment(newComment),
     ],
   );
 

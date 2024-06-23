@@ -4,7 +4,7 @@ import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 import { commentApi } from "@/backend/api-client";
 import { useComments } from "../hooks/useComments";
-import { isOptimisticComment } from "./logics/comment";
+import { createOptimisticComment, isOptimisticComment } from "./logics/comment";
 
 export const CommentListEasyStable = () => {
   const { comments, setComments, refresh } = useComments();
@@ -17,7 +17,7 @@ export const CommentListEasyStable = () => {
 
     setComments((state) => [
       ...(state || []),
-      { id: "mock-id", comment: inputText, createdAt: "" },
+      createOptimisticComment(inputText),
     ]);
 
     await commentApi.addComment(inputText);
