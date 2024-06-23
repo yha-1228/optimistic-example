@@ -3,8 +3,8 @@
 import type { FormEvent } from "react";
 import { startTransition, useOptimistic, useRef, useState } from "react";
 import { commentApi } from "@/backend/api-client";
+import { createOptimisticComment, isOptimisticComment } from "@/logics/comment";
 import { useComments } from "../hooks/useComments";
-import { createOptimisticComment, isOptimisticComment } from "./logics/comment";
 
 export const CommentListEasyUseOptimistic = () => {
   const { comments, refresh } = useComments();

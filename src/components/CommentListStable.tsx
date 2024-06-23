@@ -4,12 +4,12 @@ import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
-import { useComments } from "../hooks/useComments";
 import {
-  createOptimisticComment,
   findOptimisticComment,
+  createOptimisticComment,
   isOptimisticComment,
-} from "./logics/comment";
+} from "@/logics/comment";
+import { useComments } from "../hooks/useComments";
 import { CommentListView } from "./shared/CommentListView";
 
 export const CommentListStable = () => {

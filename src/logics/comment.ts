@@ -1,5 +1,9 @@
 import { uuid } from "uuidv4";
-import type { CommentState } from "@/hooks/useComments";
+import type { CommentResponse } from "@/backend/api-client";
+
+export type CommentState = CommentResponse & {
+  isError?: boolean;
+};
 
 export const createOptimisticComment = (newComment: string): CommentState => {
   return {

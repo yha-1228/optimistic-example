@@ -7,9 +7,9 @@ import { commentApi } from "@/backend/api-client";
 import { useComments } from "@/hooks/useComments";
 import {
   createOptimisticComment,
-  findOptimisticComment,
   isOptimisticComment,
-} from "./logics/comment";
+  findOptimisticComment,
+} from "@/logics/comment";
 import { CommentListView } from "./shared/CommentListView";
 import type { CommentResponse } from "@/backend/api-client";
 

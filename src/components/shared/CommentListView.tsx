@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { isOptimisticComment } from "../logics/comment";
+import { isOptimisticComment } from "../../logics/comment";
 import type { UseCommentsReturn } from "../../hooks/useComments";
 
 export interface CommentListViewProps extends Partial<UseCommentsReturn> {
