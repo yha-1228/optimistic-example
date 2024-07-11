@@ -8,8 +8,8 @@ import {
   useSearchParams,
   type ReadonlyURLSearchParams,
 } from "next/navigation";
-import { CommentListEasyStable } from "@/components/easy/CommentListEasyStable";
-import { CommentListEasyUseOptimistic } from "@/components/easy/CommentListEasyUseOptimistic";
+import { CommentListStable as CommentListEasyStable } from "@/components/easy/CommentListStable";
+import { CommentListUseOptimistic as CommentListEasyUseOptimistic } from "@/components/easy/CommentListUseOptimistic";
 import { CommentListStable } from "@/components/normal/CommentListStable";
 import { CommentListUseOptimistic } from "@/components/normal/CommentListUseOptimistic";
 

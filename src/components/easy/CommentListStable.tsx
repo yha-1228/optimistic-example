@@ -1,35 +1,28 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useOptimistic, useState, startTransition } from "react";
+import { useState } from "react";
 import { commentApi } from "@/backend/api-client";
 import { createOptimisticComment, isOptimisticComment } from "@/logics/comment";
 import { useCommentsData } from "@/logics/easy/useCommentsData";
 
-export const CommentListEasyUseOptimistic = () => {
-  const { comments, refresh } = useCommentsData();
-
-  const [optimisticComments, addoptimisticComment] = useOptimistic(
-    comments,
-    (state, newComment: string) => [
-      ...(state || []),
-      createOptimisticComment(newComment),
-    ],
-  );
+export const CommentListStable = () => {
+  const { comments, setComments, refresh } = useCommentsData();
 
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    startTransition(async () => {
-      addoptimisticComment(inputText);
+    setComments((state) => [
+      ...(state || []),
+      createOptimisticComment(inputText),
+    ]);
 
-      await commentApi.addComment(inputText);
-      await refresh();
+    await commentApi.addComment(inputText);
+    await refresh();
 
-      setInputText("");
-    });
+    setInputText("");
   };
 
   return (
@@ -44,7 +37,7 @@ export const CommentListEasyUseOptimistic = () => {
       </form>
 
       <ul>
-        {optimisticComments?.toReversed().map((comment) => (
+        {comments?.toReversed().map((comment) => (
           <li key={comment.id}>
             {comment.comment}{" "}
             {isOptimisticComment(comment) ? "作成中" : comment.createdAt}
