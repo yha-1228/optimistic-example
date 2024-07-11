@@ -2,12 +2,16 @@
 
 import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { CommentListEasyStable } from "@/components/CommentListEasyStable";
-import { CommentListEasyUseOptimistic } from "@/components/CommentListEasyUseOptimistic";
-import { CommentListStable } from "@/components/CommentListStable";
-import { CommentListUseOptimistic } from "@/components/CommentListUseOptimistic";
-import type { ReadonlyURLSearchParams } from "next/navigation";
+
+import {
+  useRouter,
+  useSearchParams,
+  type ReadonlyURLSearchParams,
+} from "next/navigation";
+import { CommentListEasyStable } from "@/components/easy/CommentListEasyStable";
+import { CommentListEasyUseOptimistic } from "@/components/easy/CommentListEasyUseOptimistic";
+import { CommentListStable } from "@/components/normal/CommentListStable";
+import { CommentListUseOptimistic } from "@/components/normal/CommentListUseOptimistic";
 
 type Type = "easy-stable" | "easy-use-optimistic" | "stable" | "use-optimistic";
 

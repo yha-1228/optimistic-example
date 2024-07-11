@@ -1,7 +1,6 @@
 "use client";
 
-import type { FormEvent } from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
 import {
@@ -9,11 +8,11 @@ import {
   createOptimisticComment,
   isOptimisticComment,
 } from "@/logics/comment";
-import { useComments } from "../hooks/useComments";
+import { useCommentsData } from "@/logics/normal/useCommentsData";
 import { CommentListView } from "./shared/CommentListView";
 
 export const CommentListStable = () => {
-  const { comments, setComments, loading, refresh } = useComments();
+  const { comments, setComments, loading, refresh } = useCommentsData();
 
   const [inputText, setInputText] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);

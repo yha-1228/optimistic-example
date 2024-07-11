@@ -1,13 +1,13 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
 import { commentApi } from "@/backend/api-client";
 import { createOptimisticComment, isOptimisticComment } from "@/logics/comment";
-import { useComments } from "../hooks/useComments";
+import { useCommentsData } from "@/logics/easy/useCommentsData";
 
 export const CommentListEasyStable = () => {
-  const { comments, setComments, refresh } = useComments();
+  const { comments, setComments, refresh } = useCommentsData();
 
   const [inputText, setInputText] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);

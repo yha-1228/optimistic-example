@@ -1,10 +1,12 @@
 import { format } from "date-fns";
-import { isOptimisticComment } from "../../logics/comment";
-import type { UseCommentsReturn } from "../../hooks/useComments";
+import { isOptimisticComment } from "@/logics/comment";
+import type { useCommentsData } from "@/logics/normal/useCommentsData";
 
-export interface CommentListViewProps extends Partial<UseCommentsReturn> {
+export type CommentListViewProps = Partial<
+  ReturnType<typeof useCommentsData>
+> & {
   onRetry?: (selectedComment: string) => void;
-}
+};
 
 export const CommentListView = ({
   loading,

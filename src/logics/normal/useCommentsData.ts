@@ -2,38 +2,40 @@ import { useState, useEffect } from "react";
 import { commentApi } from "@/backend/api-client";
 import type { CommentState } from "@/logics/comment";
 
-export const useComments = () => {
+export const useCommentsData = () => {
   const [comments, setComments] = useState<CommentState[]>();
   const [loading, setLoading] = useState(false);
 
   const refresh = async () => {
     setLoading(true);
-    return commentApi
-      .getComments()
-      .then((result) => {
-        setComments(result);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+
+    try {
+      const result = await commentApi.getComments();
+      setComments(result);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     let ignore = false;
 
     setLoading(true);
-    commentApi
-      .getComments()
-      .then((result) => {
+
+    const getData = async () => {
+      try {
+        const result = await commentApi.getComments();
         if (!ignore) {
           setComments(result);
         }
-      })
-      .finally(() => {
+      } finally {
         if (!ignore) {
           setLoading(false);
         }
-      });
+      }
+    };
+
+    getData();
 
     return () => {
       ignore = true;
@@ -43,4 +45,4 @@ export const useComments = () => {
   return { comments, setComments, loading, refresh };
 };
 
-export type UseCommentsReturn = ReturnType<typeof useComments>;
+export type UseCommentsDataReturn = ReturnType<typeof useCommentsData>;

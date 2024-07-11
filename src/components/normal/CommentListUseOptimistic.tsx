@@ -1,15 +1,15 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { startTransition, useOptimistic, useRef, useState } from "react";
+import { useOptimistic, useState, useRef, startTransition } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
-import { useComments } from "@/hooks/useComments";
 import {
   createOptimisticComment,
   isOptimisticComment,
   findOptimisticComment,
 } from "@/logics/comment";
+import { useCommentsData } from "@/logics/normal/useCommentsData";
 import { CommentListView } from "./shared/CommentListView";
 import type { CommentResponse } from "@/backend/api-client";
 
@@ -53,7 +53,7 @@ const optimisticCommentsReducer = (
 };
 
 export const CommentListUseOptimistic = () => {
-  const { comments, loading, refresh } = useComments();
+  const { comments, loading, refresh } = useCommentsData();
   const [optimisticComments, dispatchOptimisticComments] = useOptimistic(
     comments,
     optimisticCommentsReducer,

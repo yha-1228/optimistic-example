@@ -1,13 +1,14 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { startTransition, useOptimistic, useRef, useState } from "react";
+import { useOptimistic, useState, useRef, startTransition } from "react";
 import { commentApi } from "@/backend/api-client";
 import { createOptimisticComment, isOptimisticComment } from "@/logics/comment";
-import { useComments } from "../hooks/useComments";
+import { useCommentsData } from "@/logics/easy/useCommentsData";
 
 export const CommentListEasyUseOptimistic = () => {
-  const { comments, refresh } = useComments();
+  const { comments, refresh } = useCommentsData();
+
   const [optimisticComments, addoptimisticComment] = useOptimistic(
     comments,
     (state, newComment: string) => [
