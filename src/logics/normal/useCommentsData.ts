@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { commentApi } from "@/backend/api-client";
-import type { CommentState } from "@/logics/comment";
+import type { CommentResponse } from "@/backend/api-client";
+
+export type CommentState = CommentResponse & {
+  isError?: boolean;
+};
 
 export const useCommentsData = () => {
   const [comments, setComments] = useState<CommentState[]>();

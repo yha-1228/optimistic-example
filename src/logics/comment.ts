@@ -1,14 +1,12 @@
 import { uuid } from "uuidv4";
 import type { CommentResponse } from "@/backend/api-client";
 
-export type CommentState = CommentResponse & {
-  isError?: boolean;
-};
-
 /**
  * 楽観的UIのコメントを作成する
  */
-export const createOptimisticComment = (newComment: string): CommentState => {
+export const createOptimisticComment = (
+  newComment: string,
+): CommentResponse => {
   return {
     id: `mock-id-${uuid()}`,
     comment: newComment,
@@ -19,13 +17,15 @@ export const createOptimisticComment = (newComment: string): CommentState => {
 /**
  * 楽観的UIのコメントかどうか判定する
  */
-export const isOptimisticComment = (comment: CommentState | undefined) => {
+export const isOptimisticComment = (comment: CommentResponse | undefined) => {
   return comment?.id.startsWith("mock-id-");
 };
 
 /**
  * 楽観的UIのコメントかどうか判定する
  */
-export const findOptimisticComment = (comments: CommentState[] | undefined) => {
+export const findOptimisticComment = (
+  comments: CommentResponse[] | undefined,
+) => {
   return comments?.find(isOptimisticComment);
 };
