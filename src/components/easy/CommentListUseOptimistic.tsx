@@ -9,7 +9,7 @@ import { useCommentsData } from "@/logics/easy/useCommentsData";
 export const CommentListUseOptimistic = () => {
   const { comments, refresh } = useCommentsData();
 
-  const [optimisticComments, addoptimisticComment] = useOptimistic(
+  const [optimisticComments, addOptimisticComment] = useOptimistic(
     comments,
     (state, newComment: string) => [
       ...(state || []),
@@ -23,10 +23,15 @@ export const CommentListUseOptimistic = () => {
     e.preventDefault();
 
     startTransition(async () => {
-      addoptimisticComment(inputText);
+      addOptimisticComment(inputText);
 
-      await commentApi.addComment(inputText);
-      await refresh();
+      try {
+        await commentApi.addComment(inputText);
+        await refresh();
+      } catch (error) {
+        alert("エラーが発生しました。リロードしてください。");
+        window.location.reload();
+      }
 
       setInputText("");
     });

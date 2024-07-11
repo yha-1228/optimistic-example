@@ -19,8 +19,13 @@ export const CommentListStable = () => {
       createOptimisticComment(inputText),
     ]);
 
-    await commentApi.addComment(inputText);
-    await refresh();
+    try {
+      await commentApi.addComment(inputText);
+      await refresh();
+    } catch (error) {
+      alert("エラーが発生しました。リロードしてください。");
+      window.location.reload();
+    }
 
     setInputText("");
   };
