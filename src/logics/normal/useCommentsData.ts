@@ -44,5 +44,3 @@ export const useCommentsData = () => {
 
   return { comments, setComments, loading, refresh };
 };
-
-export type UseCommentsDataReturn = ReturnType<typeof useCommentsData>;
