@@ -23,9 +23,9 @@ export const commentApi = {
 
     // 意図的にエラーを起こす場合、
     // ここを有効にする
-    // if (Math.random() > 0.6) {
-    //   throw new Error("Random error.");
-    // }
+    if (Math.random() > 0.6) {
+      throw new Error("Random error.");
+    }
 
     return axios.post<CommentResponse>(`${BASE_URL}/comments`, { comment });
   },
