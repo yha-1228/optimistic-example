@@ -27,7 +27,6 @@ export const CommentListEasyStable = () => {
 
   return (
     <div>
-      <h2>CommentList (Easy Stable)</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

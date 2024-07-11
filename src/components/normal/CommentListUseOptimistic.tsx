@@ -102,7 +102,6 @@ export const CommentListUseOptimistic = () => {
 
   return (
     <div>
-      <h2>CommentList (useOptimistic)</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
