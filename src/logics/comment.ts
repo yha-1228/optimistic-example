@@ -17,15 +17,17 @@ export const createOptimisticComment = (
 /**
  * 楽観的UIのコメントかどうか判定する
  */
-export const isOptimisticComment = (comment: CommentResponse | undefined) => {
-  return comment?.id.startsWith("mock-id-");
+export const isOptimisticComment = (
+  comment: CommentResponse | undefined,
+): boolean => {
+  return comment?.id.startsWith("mock-id-") || false;
 };
 
 /**
- * 楽観的UIのコメントかどうか判定する
+ * 楽観的UIのコメントを検索する
  */
 export const findOptimisticComment = (
   comments: CommentResponse[] | undefined,
-) => {
+): CommentResponse | undefined => {
   return comments?.find(isOptimisticComment);
 };

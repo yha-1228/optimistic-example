@@ -74,11 +74,12 @@ export function HomePanel() {
         ))}
       </fieldset>
 
-      <hr />
-      {type === "easy-stable" && <CommentListEasyStable />}
-      {type === "easy-use-optimistic" && <CommentListEasyUseOptimistic />}
-      {type === "stable" && <CommentListStable />}
-      {type === "use-optimistic" && <CommentListUseOptimistic />}
+      <div style={{ marginTop: 40 }}>
+        {type === "easy-stable" && <CommentListEasyStable />}
+        {type === "easy-use-optimistic" && <CommentListEasyUseOptimistic />}
+        {type === "stable" && <CommentListStable />}
+        {type === "use-optimistic" && <CommentListUseOptimistic />}
+      </div>
     </div>
   );
 }
