@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { commentApi } from "@/backend/api-client";
 import { createOptimisticComment, isOptimisticComment } from "@/logics/comment";
 import { useCommentsData } from "@/logics/easy/useCommentsData";
@@ -10,7 +10,6 @@ export const CommentListEasyStable = () => {
   const { comments, setComments, refresh } = useCommentsData();
 
   const [inputText, setInputText] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +23,6 @@ export const CommentListEasyStable = () => {
     await refresh();
 
     setInputText("");
-    inputRef.current?.focus();
   };
 
   return (
@@ -35,7 +33,6 @@ export const CommentListEasyStable = () => {
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          ref={inputRef}
         />
         <button disabled={inputText.trim().length === 0}>投稿</button>
       </form>

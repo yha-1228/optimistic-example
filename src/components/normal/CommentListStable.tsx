@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
 import {
@@ -15,7 +15,6 @@ export const CommentListStable = () => {
   const { comments, setComments, loading, refresh } = useCommentsData();
 
   const [inputText, setInputText] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [creating, setCreating] = useState(false);
 
@@ -72,7 +71,6 @@ export const CommentListStable = () => {
       toast.error("投稿に失敗しました。");
     } finally {
       setCreating(false);
-      inputRef.current?.focus();
     }
   };
 
@@ -84,7 +82,6 @@ export const CommentListStable = () => {
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          ref={inputRef}
         />
         <button disabled={inputText.trim().length === 0 || creating}>
           投稿

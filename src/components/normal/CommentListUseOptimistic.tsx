@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useOptimistic, useState, useRef, startTransition } from "react";
+import { useOptimistic, useState, startTransition } from "react";
 import toast from "react-hot-toast";
 import { commentApi } from "@/backend/api-client";
 import {
@@ -60,7 +60,6 @@ export const CommentListUseOptimistic = () => {
   );
 
   const [inputText, setInputText] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const [creating, setCreating] = useState(false);
 
@@ -97,7 +96,6 @@ export const CommentListUseOptimistic = () => {
         toast.error("投稿に失敗しました。");
       } finally {
         setCreating(false);
-        inputRef.current?.focus();
       }
     });
   };
@@ -110,7 +108,6 @@ export const CommentListUseOptimistic = () => {
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          ref={inputRef}
         />
         <button disabled={inputText.trim().length === 0 || creating}>
           投稿
